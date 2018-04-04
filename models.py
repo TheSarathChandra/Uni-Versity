@@ -24,6 +24,18 @@ class User(Base):
         self.email = email
         self.password = password
 
+class Student(Base):
+    __tablename__ = 'Students'
+    
+    name = db.Column(db.String(50), primary_key=True)
+    email = db.Column(db.String(120))
+    password = db.Column(db.String(50))
+
+    def __init__(self, name, email,password):
+        self.name = name
+        self.email = email
+        self.password = password
+
    # def is_authenticated(self):
     #    return True
 

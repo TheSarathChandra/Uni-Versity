@@ -54,8 +54,8 @@ def showTables():
 @app.route('/showSignUp1', methods=['POST', 'GET'])
 def showSignUp1():
     if request.method == 'POST':
-        user = User(request.form['inputName'], request.form['inputEmail'], request.form['inputPassword'])
-        db.session.add(user)
+        student = Student(request.form['inputName'], request.form['inputEmail'], request.form['inputPassword'])
+        db.session.add(student)
         db.session.commit()
         return redirect(url_for('main'))
 
@@ -66,13 +66,13 @@ def showSignUp1():
 @app.route('/showSignIn1',methods=['POST','GET'])
 def showSignIn1():
     if request.method == 'POST':
-        user = User.query.filter_by(name=request.form['inputName']).first()
+        student = Student.query.filter_by(name=request.form['inputName']).first()
     
-        if request.form['inputPassword']== user.password :
+        if request.form['inputPassword']== student.password :
             session['inputName'] = request.form['inputName']
             return render_template('table1.html')
         else:
-            user = not_found_error
+            student = not_found_error
     return render_template('signin1.html')
 
 
