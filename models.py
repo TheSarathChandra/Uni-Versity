@@ -27,14 +27,20 @@ class User(Base):
 class Student(Base):
     __tablename__ = 'Students'
     
-    name = db.Column(db.String(50), primary_key=True)
+    ID = db.Column(db.String(50), primary_key=True)
+    name = db.Column(db.String(50))
     email = db.Column(db.String(120))
     password = db.Column(db.String(50))
+    address = db.Column(db.String(50))
+    phone = db.Column(db.Integer())
 
-    def __init__(self, name, email,password):
+    def __init__(self, ID, name, email,password,address,phone):
+        self.ID = ID
         self.name = name
         self.email = email
         self.password = password
+        self.address = address
+        self.phone = phone
 
    # def is_authenticated(self):
     #    return True
