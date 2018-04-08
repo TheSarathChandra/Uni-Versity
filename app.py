@@ -235,7 +235,7 @@ def deleteStudentCourses():
 def showStudentDetails():
     if request.method == 'GET' and session['inputID']:
         studdet = StudentCourse.query.all() 
-        return render_template('studentdetails.html', studdet=studdet,sessionid=session['inputID'])
+        return render_template('studentdetails.html', studdet=studdet,sessionlol=session['inputID'])
 
 
 
@@ -248,6 +248,12 @@ def logout():
 def studentLogout():
     session.pop('inputID')
     return redirect(url_for('main'))
+
+@app.route('/logoutAll',methods=['POST','GET'])
+def logoutAll():
+    session.clear()
+    return redirect(url_for('main'))
+
 
     
 #@app.teardown_appcontext
