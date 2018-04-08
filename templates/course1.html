@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Python Flask Bucket List App</title>
+ 
+    
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+    
+
+  </head>
+ 
+  <body>
+    &nbsp;
+ 
+      <div class="jumbotron" style="background-color: rgba(0,0,0,0.0)" >
+        <h1 style=" color: white; text-shadow: 2px 2px 4px #000000;"><center>COURSES</center></h1>
+        <br>
+        <br>
+        <form method="POST" class="form-signin" action="{{url_for('editCourses')}}">
+        <label for="courseID" class="sr-only">Course ID</label>
+        <input type="text" name="inputCourseID" id="inputCourseID" class="form-control" placeholder="ID" required autofocus>
+        <label for="inputCourseName" class="sr-only">Course Name</label>
+        <input type="name" name="inputCourseName" id="inputCourseName" class="form-control" placeholder="Name" required autofocus>
+        <label for="credits" class="sr-only">Credits</label>
+        <input type="number" name="inputCredits" id="inputCredits" class="form-control" placeholder="Credits" required autofocus>
+        <label for="Department" class="sr-only">Department</label>
+        <input type="text" name="inputDepartment" id="inputDepartment" class="form-control" placeholder="Department" required autofocus>
+       
+         
+       <input type="submit" value="ADD" class="btn btn-primary btn-lg btn-block">
+      </form>
+
+      
+     
+ 
+       
+ 
+      
+      <br>
+       <br>
+        <br>
+         <br>
+       <br>
+
+       <br>
+
+      <br>
+
+       
+<footer class="footer">
+        <p style=" color: white; text-shadow: 2px 2px 4px #000000;"> &copy; 2018</p>
+      </footer>
+
+
+
+
+ 
+    </div>
+  </body>
+</html>

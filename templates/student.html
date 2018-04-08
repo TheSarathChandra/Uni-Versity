@@ -1,0 +1,11 @@
+<table style = "width: 100%">
+	{% for item in stud %}
+	<tr>
+        <th>{{ item['ID'] }} </th>
+        <th>{{ item['name'] }} </th>
+        <th> {{ item['address'] }} </th>
+        <th> {{ item['phone'] }} </th>
+    </tr>
+{% endfor %}
+</table>
+    

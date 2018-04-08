@@ -1,0 +1,27 @@
+ <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+ <table style = "width: 100%">
+  {% for item in cours%}
+  <tr>
+        <th>{{ item['courseID'] }}</th>
+        <th >{{ item['courseName'] }}</th>
+        <th>{{ item['credits'] }} </th>
+        <th>{{ item['department'] }} </th>
+        
+    </tr>
+{% endfor %}
+</table>
+<p class="pull-right">add departments here:</p>
+    <a href="{{ url_for('editCourses') }}"><input type="submit" href="../templates/department1.html" value="add" class="btn btn-primary btn-lg btn-block"></a>
+      </div>
+      <a href="{{ url_for('changeCourses') }}"><input type="submit" href="../templates/course1.html" value="change" class="btn btn-primary btn-lg btn-block"></a>
+     <a href="{{ url_for('deleteCourses') }}"><input type="submit" href="../templates/course1.html" value="delete" class="btn btn-primary btn-lg btn-block"></a>
+     <br>
+     <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showDepartments') }}" role="button">Back</a>
+            </p>
+    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showStudentCourses') }}" role="button">Students enrolled in courses</a>
+            </p>
+   <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('logout') }}" role="button">logout</a>
+            </p>
