@@ -150,8 +150,9 @@ def Search():
 @app.route('/showCourses',methods=['POST','GET'])
 def showCourses():
     if request.method == 'GET' and session['inputName']:
-        cours = Course.query.all()  
-        return render_template('course.html', cours=cours)
+        rof = request.args.get('department')
+        cours = Course.query.filter_by(department=rof)
+        return render_template('course.html', cours=cours,rof=rof)
 
 @app.route('/editCourses',methods=['POST','GET'])
 def editCourses():
@@ -196,7 +197,8 @@ def deleteCourses():
 @app.route('/showStudentCourses',methods=['POST','GET'])
 def showStudentCourses():
     if request.method == 'GET' and session['inputName']:
-        studcours = StudentCourse.query.all() 
+        rop = request.args.get('courseID')
+        studcours = StudentCourse.query.filter_by(courseID=rop)
         return render_template('studentcourse.html', studcours=studcours)
 
 @app.route('/editStudentCourses',methods=['POST','GET'])

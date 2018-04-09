@@ -4,12 +4,12 @@
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/signup.css" rel="stylesheet">
     
-      
+
        
  <table style = "width: 100%">
   {% for item in cours %}
   <tr>
-        <th>{{ item['courseID'] }}</th>
+        <th><a href="{{ url_for('showStudentCourses', courseID = item['courseID'] ) }}">{{ item['courseID'] }}</a></th>
         <th >{{ item['courseName'] }}</th>
         <th>{{ item['credits'] }} </th>
         <th>{{ item['department'] }} </th>

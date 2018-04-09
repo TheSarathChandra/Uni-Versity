@@ -6,8 +6,8 @@
  <table style = "width: 100%">
   {% for item in depart %}
   <tr>
-        <th><a href="{{ url_for('showCourses') }}">{{ item['departmentID'] }}</a> </th>
-        <th href="{{ url_for('showCourses', department = 'departmentName' ) }}"><a href="{{ url_for('showCourses') }}">{{ item['departmentName'] }}</a> </th>
+        <th>{{ item['departmentID'] }}</th>
+        <th href="{{ url_for('showCourses') }}"><a href="{{ url_for('showCourses', department = item['departmentName'] ) }}">{{ item['departmentName'] }}</a> </th>
     </tr>
 {% endfor %}
 </table>
