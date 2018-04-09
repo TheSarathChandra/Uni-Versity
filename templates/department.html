@@ -2,7 +2,7 @@
  
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/signup.css" rel="stylesheet">
- <h1>{{ sessionid }}</h1>
+     <h1 style=" color: black; text-shadow: 2px 2px 4px #000000;"><center>ADMIN : {{ sessionid }}</center></h1>
  <table style = "width: 100%">
   {% for item in depart %}
   <tr>
@@ -17,6 +17,7 @@
       <a href="{{ url_for('changeDepartments') }}"><input type="submit" href="../templates/course1.html" value="change" class="btn btn-primary btn-lg btn-block"></a>
      <a href="{{ url_for('deleteDepartments') }}"><input type="submit" href="../templates/course1.html" value="delete" class="btn btn-primary btn-lg btn-block"></a>
      <br>
+     <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Back</a>
      <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showCourses') }}" role="button">Courses</a></p>
    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('logout') }}" role="button">logout</a>
             </p>

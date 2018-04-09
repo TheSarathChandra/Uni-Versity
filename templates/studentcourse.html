@@ -8,7 +8,9 @@
  <table style = "width: 100%">
   {% for item in studcours %}
   <tr>
+        <th>{{ item['courseID'] }} </th>
         <th>{{ item['courseName'] }} </th>
+        <th>{{ item['studentID'] }} </th>
         <th>{{ item['studentName'] }} </th>
         <th>{{ item['marks'] }} </th>
         <th>{{ item['attendance'] }} </th>
@@ -23,5 +25,6 @@
       <br>
 <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showCourses') }}" role="button">Back</a>
             </p>
+    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Main Page</a>
    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('logout') }}" role="button">logout</a>
             </p>

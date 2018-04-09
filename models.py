@@ -58,13 +58,17 @@ class Course(Base):
 
 class StudentCourse(Base):
     __tablename__='studentCourses'
-    courseName = db.Column(db.String(50), primary_key=True)
-    studentName =  db.Column(db.String(50))
-    marks = db.Column(db.Integer())
-    attendance = db.Column(db.Integer())
+    courseID = db.Column(db.String(50), primary_key=True,unique=False)
+    courseName =  db.Column(db.String(50),unique=False)
+    studentID =  db.Column(db.String(50),unique=False)
+    studentName =  db.Column(db.String(50),unique=False)
+    marks = db.Column(db.Integer(),unique=False)
+    attendance = db.Column(db.Integer(),unique=False)
 
-    def __init__(self,courseName,studentName, marks,attendance):
+    def __init__(self, courseID, courseName, studentID, studentName, marks,attendance):
+        self.courseID = courseID
         self.courseName = courseName
+        self.studentID = studentID
         self.studentName = studentName
         self.marks = marks
         self.attendance = attendance

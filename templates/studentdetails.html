@@ -8,15 +8,21 @@
 
  <table style = "width: 100%">
   {% for item in studdet %}
+  {% if item['studentID'] == sessionlol %}
   <tr>
+         <th>{{ item['courseID'] }} </th>
         <th>{{ item['courseName'] }} </th>
+        <th>{{ item['studentID'] }} </th>
         <th>{{ item['studentName'] }} </th>
         <th>{{ item['marks'] }} </th>
         <th>{{ item['attendance'] }} </th>
-    </tr>
+  </tr>
+  {% endif %}
 {% endfor %}
 </table>
 
       <br>
+      <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Back</a>
+            </p>
    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('studentLogout') }}" role="button">logout</a>
             </p>
