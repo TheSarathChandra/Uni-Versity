@@ -153,7 +153,6 @@ def showAllCourses():
         cours = Course.query.all()
         return render_template('course.html', cours=cours)
 
-
 @app.route('/showCourses',methods=['POST','GET'])
 def showCourses():
     if request.method == 'GET' and session['inputName']:
@@ -167,7 +166,7 @@ def editCourses():
         course = Course(request.form['inputCourseID'], request.form['inputCourseName'], request.form['inputCredits'], request.form['inputDepartment'])
         db.session.add(course)
         db.session.commit() 
-        return redirect(url_for('showAllCourses'))
+        return redirect(url_for('showCourses',department=request.form['inputDepartment']))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('course1.html')
@@ -181,7 +180,7 @@ def changeCourses():
         changecours.credits = request.form['inputCredits']
         changecours.department = request.form['inputDepartment']
         db.session.commit() 
-        return redirect(url_for('showAllCourses'))
+        return redirect(url_for('showCourses',department=request.form['inputDepartment']))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('course2.html')
@@ -191,7 +190,7 @@ def deleteCourses():
     if request.method == 'POST':
         deletecours = Course.query.filter_by(courseID=request.form['inputCourseID']).delete()
         db.session.commit()
-        return redirect(url_for('showAllCourses'))
+        return redirect(url_for('showCourses',department=request.form['inputDepartment']))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('course3.html')
@@ -217,10 +216,10 @@ def showStudentCourses():
 @app.route('/editStudentCourses',methods=['POST','GET'])
 def editStudentCourses():
     if request.method == 'POST':
-        studentcourse = StudentCourse(request.form['inputCourseID'],request.form['inputCourseName'],request.form['inputStudentID'],request.form['inputStudentName'],request.form['inputMarks'], request.form['inputAttendance'])
+        studentcourse = StudentCourse(request.form['inputIndex'],request.form['inputCourseID'],request.form['inputCourseName'],request.form['inputStudentID'],request.form['inputStudentName'],request.form['inputMarks'], request.form['inputAttendance'])
         db.session.add(studentcourse)
         db.session.commit() 
-        return redirect(url_for('showAllStudentCourses'))
+        return redirect(url_for('showStudentCourses',courseID=request.form['inputCourseID']))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse1.html')
@@ -229,13 +228,14 @@ def editStudentCourses():
 def changeStudentCourses():
     if request.method == 'POST':
         changestudcours = StudentCourse.query.filter_by(courseID=request.form['inputCourseID']).first()
+        changestudcours.courseName = request.form['inputIndex']
         changestudcours.courseName = request.form['inputCourseName']
         changestudcours.studentID = request.form['inputStudentID']
         changestudcours.studentName = request.form['inputStudentName']
         changestudcours.marks = request.form['inputMarks']
         changestudcours.attendance = request.form['inputAttendance']
         db.session.commit() 
-        return redirect(url_for('showAllStudentCourses'))
+        return redirect(url_for('showStudentCourses',courseID=request.form['inputCourseID']))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse2.html')
@@ -243,9 +243,9 @@ def changeStudentCourses():
 @app.route('/deleteStudentCourses',methods=['POST','GET'])
 def deleteStudentCourses():
     if request.method == 'POST':
-        deletestudcours = StudentCourse.query.filter_by(courseID=request.form['inputCourseID']).delete()
+        deletestudcours = StudentCourse.query.filter_by(index=request.form['inputIndex']).delete()
         db.session.commit()
-        return redirect(url_for('showAllStudentCourses'))
+        return redirect(url_for('showStudentCourses',courseID=request.form['inputCourseID']))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse3.html')

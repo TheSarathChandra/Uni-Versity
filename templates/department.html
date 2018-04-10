@@ -3,15 +3,23 @@
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/signup.css" rel="stylesheet">
      <h1 style=" color: black; text-shadow: 2px 2px 4px #000000;"><center>ADMIN : {{ sessionid }}</center></h1>
+     <br>
+ <div class="jumbotron" style="background-color: rgba(128,128,128,0.1)" >
  <table style = "width: 100%">
+  <tr>
+    <th>Department ID</th>
+    <th>Department Name</th> 
+  </tr>
   {% for item in depart %}
   <tr>
-        <th>{{ item['departmentID'] }}</th>
-        <th href="{{ url_for('showCourses') }}"><a href="{{ url_for('showCourses', department = item['departmentName'] ) }}">{{ item['departmentName'] }}</a> </th>
+        <td>{{ item['departmentID'] }}</td>
+        <td href="{{ url_for('showCourses') }}"><a href="{{ url_for('showCourses', department = item['departmentName'] ) }}">{{ item['departmentName'] }}</a> </td>
+         <td href="{{ url_for('showCourses') }}"><a href="{{ url_for('showCourses', department = item['departmentName'] ) }}">Open courses in this Department</a> </td>
     </tr>
 {% endfor %}
 </table>
-<p class="pull-right">add departments here:</p>
+</div>
+<p class="pull-right"><center>Make your departments edits here:</center></p>
     <a href="{{ url_for('editDepartments') }}"><input type="submit" href="../templates/department1.html" value="add" class="btn btn-primary btn-lg btn-block"></a>
       </div>
       <a href="{{ url_for('changeDepartments') }}"><input type="submit" href="../templates/course1.html" value="change" class="btn btn-primary btn-lg btn-block"></a>

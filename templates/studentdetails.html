@@ -10,12 +10,20 @@
   {% for item in studdet %}
   {% if item['studentID'] == sessionlol %}
   <tr>
-         <th>{{ item['courseID'] }} </th>
-        <th>{{ item['courseName'] }} </th>
-        <th>{{ item['studentID'] }} </th>
-        <th>{{ item['studentName'] }} </th>
-        <th>{{ item['marks'] }} </th>
-        <th>{{ item['attendance'] }} </th>
+         <th>CourseID</th>
+        <th>CourseName</th>
+        <th>StudentID</th>
+        <th>StudentName</th>
+        <th>Marks</th>
+        <th>Attendance</th>
+  </tr>
+  <tr>
+         <td>{{ item['courseID'] }} </td>
+        <td>{{ item['courseName'] }} </td>
+        <td>{{ item['studentID'] }} </td>
+        <td>{{ item['studentName'] }} </td>
+        <td>{{ item['marks'] }} </td>
+        <td>{{ item['attendance'] }} </td>
   </tr>
   {% endif %}
 {% endfor %}
