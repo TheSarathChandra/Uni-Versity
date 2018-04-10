@@ -147,6 +147,13 @@ def Search():
     return render_template('course.html')
 
 
+@app.route('/showAllCourses',methods=['POST','GET'])
+def showAllCourses():
+    if request.method == 'GET' and session['inputName']:
+        cours = Course.query.all()
+        return render_template('course.html', cours=cours)
+
+
 @app.route('/showCourses',methods=['POST','GET'])
 def showCourses():
     if request.method == 'GET' and session['inputName']:
@@ -160,7 +167,7 @@ def editCourses():
         course = Course(request.form['inputCourseID'], request.form['inputCourseName'], request.form['inputCredits'], request.form['inputDepartment'])
         db.session.add(course)
         db.session.commit() 
-        return redirect(url_for('showCourses'))
+        return redirect(url_for('showAllCourses'))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('course1.html')
@@ -174,7 +181,7 @@ def changeCourses():
         changecours.credits = request.form['inputCredits']
         changecours.department = request.form['inputDepartment']
         db.session.commit() 
-        return redirect(url_for('showCourses'))
+        return redirect(url_for('showAllCourses'))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('course2.html')
@@ -184,7 +191,7 @@ def deleteCourses():
     if request.method == 'POST':
         deletecours = Course.query.filter_by(courseID=request.form['inputCourseID']).delete()
         db.session.commit()
-        return redirect(url_for('showCourses'))
+        return redirect(url_for('showAllCourses'))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('course3.html')
@@ -193,6 +200,12 @@ def deleteCourses():
 
 
 #StudentCourse
+
+@app.route('/showAllStudentCourses',methods=['POST','GET'])
+def showAllStudentCourses():
+    if request.method == 'GET' and session['inputName']:
+        studcours = StudentCourse.query.all()
+        return render_template('studentcourse.html', studcours=studcours)
 
 @app.route('/showStudentCourses',methods=['POST','GET'])
 def showStudentCourses():
@@ -207,7 +220,7 @@ def editStudentCourses():
         studentcourse = StudentCourse(request.form['inputCourseID'],request.form['inputCourseName'],request.form['inputStudentID'],request.form['inputStudentName'],request.form['inputMarks'], request.form['inputAttendance'])
         db.session.add(studentcourse)
         db.session.commit() 
-        return redirect(url_for('showStudentCourses'))
+        return redirect(url_for('showAllStudentCourses'))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse1.html')
@@ -222,7 +235,7 @@ def changeStudentCourses():
         changestudcours.marks = request.form['inputMarks']
         changestudcours.attendance = request.form['inputAttendance']
         db.session.commit() 
-        return redirect(url_for('showStudentCourses'))
+        return redirect(url_for('showAllStudentCourses'))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse2.html')
@@ -232,7 +245,7 @@ def deleteStudentCourses():
     if request.method == 'POST':
         deletestudcours = StudentCourse.query.filter_by(courseID=request.form['inputCourseID']).delete()
         db.session.commit()
-        return redirect(url_for('showStudentCourses'))
+        return redirect(url_for('showAllStudentCourses'))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse3.html')

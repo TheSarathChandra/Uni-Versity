@@ -15,9 +15,9 @@
     <a href="{{ url_for('editDepartments') }}"><input type="submit" href="../templates/department1.html" value="add" class="btn btn-primary btn-lg btn-block"></a>
       </div>
       <a href="{{ url_for('changeDepartments') }}"><input type="submit" href="../templates/course1.html" value="change" class="btn btn-primary btn-lg btn-block"></a>
-     <a href="{{ url_for('deleteDepartments') }}"><input type="submit" href="../templates/course1.html" value="delete" class="btn btn-primary btn-lg btn-block"></a>
+     <a href="{{ url_for('deleteDepartments') }}" ><input type="submit" href="../templates/course1.html" value="delete" style="color: red;" class="btn btn-primary btn-lg btn-block"></a>
      <br>
      <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Back</a>
-     <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showCourses') }}" role="button">Courses</a></p>
-   <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('logout') }}" role="button">logout</a>
+     <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showAllCourses') }}" role="button">All Courses of Every Department</a></p>
+   <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('logout') }}" role="button" >logout</a>
             </p>

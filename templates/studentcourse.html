@@ -20,10 +20,10 @@
 <p class="pull-right">add courses here:</p>
     <a href="{{ url_for('editStudentCourses') }}"><input type="submit" value="add" class="btn btn-primary btn-lg btn-block"></a>
     <a href="{{ url_for('changeStudentCourses') }}"><input type="submit" value="change" class="btn btn-primary btn-lg btn-block"></a>
-     <a href="{{ url_for('deleteStudentCourses') }}"><input type="submit" value="delete" class="btn btn-primary btn-lg btn-block"></a>
+     <a href="{{ url_for('deleteStudentCourses') }}"><input type="submit" style="color: red" value="delete" class="btn btn-primary btn-lg btn-block"></a>
       </div>
       <br>
-<p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showCourses') }}" role="button">Back</a>
+<p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showDepartments') }}" role="button">Back to Department Page</a>
             </p>
     <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Main Page</a>
    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('logout') }}" role="button">logout</a>
