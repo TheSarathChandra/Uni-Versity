@@ -5,7 +5,7 @@
 
 <h1>{{ sessionlol }}</h1>
 
-
+<div class="jumbotron" style="background-color: rgba(128,128,128,0.1)" >
  <table style = "width: 100%">
   {% for item in studdet %}
   {% if item['studentID'] == sessionlol %}
@@ -28,6 +28,7 @@
   {% endif %}
 {% endfor %}
 </table>
+</div>
 
       <br>
       <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Back</a>

@@ -216,7 +216,7 @@ def showStudentCourses():
 @app.route('/editStudentCourses',methods=['POST','GET'])
 def editStudentCourses():
     if request.method == 'POST':
-        studentcourse = StudentCourse(request.form['inputIndex'],request.form['inputCourseID'],request.form['inputCourseName'],request.form['inputStudentID'],request.form['inputStudentName'],request.form['inputMarks'], request.form['inputAttendance'])
+        studentcourse = StudentCourse(request.form['inputCourseID'],request.form['inputCourseName'],request.form['inputStudentID'],request.form['inputStudentName'],request.form['inputMarks'], request.form['inputAttendance'])
         db.session.add(studentcourse)
         db.session.commit() 
         return redirect(url_for('showStudentCourses',courseID=request.form['inputCourseID']))
@@ -228,7 +228,6 @@ def editStudentCourses():
 def changeStudentCourses():
     if request.method == 'POST':
         changestudcours = StudentCourse.query.filter_by(courseID=request.form['inputCourseID']).first()
-        changestudcours.courseName = request.form['inputIndex']
         changestudcours.courseName = request.form['inputCourseName']
         changestudcours.studentID = request.form['inputStudentID']
         changestudcours.studentName = request.form['inputStudentName']
@@ -243,7 +242,7 @@ def changeStudentCourses():
 @app.route('/deleteStudentCourses',methods=['POST','GET'])
 def deleteStudentCourses():
     if request.method == 'POST':
-        deletestudcours = StudentCourse.query.filter_by(index=request.form['inputIndex']).delete()
+        deletestudcours = StudentCourse.query.filter_by(studentID=request.form['inputStudentID']).delete()
         db.session.commit()
         return redirect(url_for('showStudentCourses',courseID=request.form['inputCourseID']))
 
