@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from app import db
 
@@ -22,7 +23,7 @@ class User(Base):
     def __init__(self, name, email,password):
         self.name = name
         self.email = email
-        self.password = password
+        self.password = password 
 
 class Student(Base):
     __tablename__ = 'Students'
@@ -59,12 +60,14 @@ class Course(Base):
 class StudentCourse(Base):
     __tablename__='studentCourses'
 
-    courseID = db.Column(db.String(50),primary_key=True,unique=False)
+    courseID = db.Column(db.String(50),ForeignKey('Courses.courseID'),primary_key=True,unique=False)
     courseName =  db.Column(db.String(50),unique=False)
-    studentID =  db.Column(db.String(50),primary_key=True,unique=False)
+    studentID =  db.Column(db.String(50),ForeignKey('Students.ID'),primary_key=True,unique=False)
     studentName =  db.Column(db.String(50),unique=False)
     marks = db.Column(db.Integer(),unique=False)
     attendance = db.Column(db.Integer(),unique=False)
+    Courses = relationship("Course")
+    Students = relationship("Student")
 
     def __init__(self, courseID, courseName, studentID, studentName, marks,attendance):
         self.courseID = courseID

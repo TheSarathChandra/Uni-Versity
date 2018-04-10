@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask,redirect,session,url_for,abort
 from flask import Flask, render_template, request
-#from db_setup import init_db
-#from database import db_session
 import os
 from flask_sqlalchemy import SQLAlchemy
 from models import *
@@ -21,6 +19,9 @@ db = SQLAlchemy(app)
 def main():
     return render_template('index.html')
 
+#Login...........................................................................................................................
+
+#Admin Signup
 
 @app.route('/showSignUp', methods=['POST', 'GET'])
 def showSignUp():
@@ -35,6 +36,8 @@ def showSignUp():
         return render_template('signup.html')
 
 
+#Admin SignIn
+
 @app.route('/showSignIn',methods=['POST','GET'])
 def showSignIn():
     if request.method == 'POST':
@@ -48,10 +51,8 @@ def showSignIn():
     return render_template('signin.html')
 
 
-@app.route('/showTables')
-def showTables():
-    return render_template('table.html')
 
+#Student SignUp
 
 @app.route('/showSignUp1', methods=['POST', 'GET'])
 def showSignUp1():
@@ -65,6 +66,8 @@ def showSignUp1():
         return render_template('signup1.html')
 
 
+#Student SignIn
+
 @app.route('/showSignIn1',methods=['POST','GET'])
 def showSignIn1():
     if request.method == 'POST':
@@ -77,24 +80,22 @@ def showSignIn1():
             student = not_found_error
     return render_template('signin1.html')
 
-
-@app.route('/showTables1')
-def showTables1():
-    return render_template('table.html')
-
-@app.route('/showStudents', methods=['GET', 'POST'])
-def showStudents():
-    stud = Student.query.all()
-    return render_template('student.html', stud=stud)
+#............................................................................................................................
 
 
-#Departments
+#Departments.................................................................................................................
+
+
+#Show All Departments
 
 @app.route('/showDepartments',methods=['POST','GET'])
 def showDepartments():
     if request.method == 'GET' and session['inputName']:
         depart = Department.query.all() 
         return render_template('department.html', depart=depart, sessionid=session['inputName'])
+
+
+#Add Departments
     
 @app.route('/editDepartments',methods=['POST','GET'])
 def editDepartments():
@@ -109,6 +110,9 @@ def editDepartments():
     if request.method == 'GET' and session['inputName']:    
         return render_template('department1.html')
 
+
+#Change Details of Departments
+
 @app.route('/changeDepartments',methods=['POST','GET'])
 def changeDepartments():
     if request.method == 'POST':
@@ -120,6 +124,9 @@ def changeDepartments():
     if request.method == 'GET' and session['inputName']:    
         return render_template('department2.html')
 
+
+#Delete Departments
+
 @app.route('/deleteDepartments',methods=['POST','GET'])
 def deleteDepartments():
     if request.method == 'POST':
@@ -130,22 +137,12 @@ def deleteDepartments():
     if request.method == 'GET' and session['inputName']:    
         return render_template('department3.html')
 
-#Courses
+#.................................................................................................
 
-@app.route('/Search',methods=['POST','GET'])
-def Search():
 
-    if request.method=='POST' and session['inputName']:
-        cours = Course.query.filter_by(courseID=request.form['inputCourseID'])
-        result = db.engine.execute(cours)
-        print('1111')
-        print(cours)
-        print('2222')
-        for row in result:
-            print("username:", row['courseID'])
-        return render_template('course.html',cours=cours)
-    return render_template('course.html')
+#Courses..........................................................................................
 
+#Show All The Courses
 
 @app.route('/showAllCourses',methods=['POST','GET'])
 def showAllCourses():
@@ -153,12 +150,16 @@ def showAllCourses():
         cours = Course.query.all()
         return render_template('course.html', cours=cours)
 
+#Show the Courses in that particular Department
+
 @app.route('/showCourses',methods=['POST','GET'])
 def showCourses():
     if request.method == 'GET' and session['inputName']:
         rof = request.args.get('department')
         cours = Course.query.filter_by(department=rof)
         return render_template('course.html', cours=cours,rof=rof)
+
+#Add the courses in that particular Department
 
 @app.route('/editCourses',methods=['POST','GET'])
 def editCourses():
@@ -171,6 +172,7 @@ def editCourses():
     if request.method == 'GET' and session['inputName']:    
         return render_template('course1.html')
 
+#Change the Course Details in that Particular Department
 
 @app.route('/changeCourses',methods=['POST','GET'])
 def changeCourses():
@@ -185,6 +187,8 @@ def changeCourses():
     if request.method == 'GET' and session['inputName']:    
         return render_template('course2.html')
 
+#Delete courses in that Particular Department
+
 @app.route('/deleteCourses',methods=['POST','GET'])
 def deleteCourses():
     if request.method == 'POST':
@@ -194,11 +198,13 @@ def deleteCourses():
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('course3.html')
-#obj = user.query.filter_by(courseID=courseID).first()
-#obj.courseName =  request.form['inputCourseName']
+
+#..........................................................................................................
 
 
-#StudentCourse
+#StudentCourse............................................................................................
+
+#Show All the Courses & the Students in it
 
 @app.route('/showAllStudentCourses',methods=['POST','GET'])
 def showAllStudentCourses():
@@ -206,12 +212,16 @@ def showAllStudentCourses():
         studcours = StudentCourse.query.all()
         return render_template('studentcourse.html', studcours=studcours)
 
+#Show the the students in that particular Course
+
 @app.route('/showStudentCourses',methods=['POST','GET'])
 def showStudentCourses():
     if request.method == 'GET' and session['inputName']:
         rop = request.args.get('courseID')
         studcours = StudentCourse.query.filter_by(courseID=rop)
         return render_template('studentcourse.html', studcours=studcours)
+
+#Add the students in that particular Course
 
 @app.route('/editStudentCourses',methods=['POST','GET'])
 def editStudentCourses():
@@ -223,6 +233,8 @@ def editStudentCourses():
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse1.html')
+
+#Change the details of Students enrolled in that Particular Course or Change the Details of Course of that Particular Student
 
 @app.route('/changeStudentCourses',methods=['POST','GET'])
 def changeStudentCourses():
@@ -239,6 +251,8 @@ def changeStudentCourses():
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse2.html')
 
+#Delete that Student enrolled in that Particular Course
+
 @app.route('/deleteStudentCourses',methods=['POST','GET'])
 def deleteStudentCourses():
     if request.method == 'POST':
@@ -248,38 +262,75 @@ def deleteStudentCourses():
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('studentcourse3.html')
+#.............................................................................................................................
 
+
+
+#StudentDetails...............................................................................................................
+
+
+#When the Student is logged in show his details like marks in each course, Address & Phone Number
 
 @app.route('/showStudentDetails',methods=['POST','GET'])
 def showStudentDetails():
     if request.method == 'GET' and session['inputID']:
         sessionlol=session['inputID']
+        stud = Student.query.all()
         studdet = StudentCourse.query.filter_by(studentID=session['inputID']).first()
         studdet = db.engine.execute("SELECT * from StudentCourses") 
-        return render_template('studentdetails.html', studdet=studdet,sessionlol=session['inputID'])
+        return render_template('studentdetails.html', studdet=studdet,sessionlol=session['inputID'], stud=stud)
 
 
+#Change Address or Phone Number of the Student
+
+@app.route('/changeStudentDetails',methods=['POST','GET'])
+def changeStudentDetails():
+    if request.method == 'POST':
+        changestuddet = Student.query.filter_by(ID=session['inputID']).first()
+        changestuddet.address = request.form['inputAddress']
+        changestuddet.phone = request.form['inputPhone']
+        db.session.commit() 
+        return redirect(url_for('showStudentDetails'))
+
+    if request.method == 'GET' and session['inputID']:    
+        return render_template('studentdetails2.html')
+
+#...............................................................................................................................
+
+
+
+
+
+#AdminLogout....................................................................................................................
 
 @app.route('/logout',methods=['POST','GET'])
 def logout():
     session.pop('inputName')
     return redirect(url_for('main'))
 
+#................................................................................................................................
+
+
+#StudentLogout....................................................................................................................
+
 @app.route('/studentLogout',methods=['POST','GET'])
 def studentLogout():
     session.pop('inputID')
     return redirect(url_for('main'))
+
+#..................................................................................................................................
+
+
+#LogoutOfAllSessions................................................................................................................
 
 @app.route('/logoutAll',methods=['POST','GET'])
 def logoutAll():
     session.clear()
     return redirect(url_for('main'))
 
+#......................................................................................................................................
 
-    
-#@app.teardown_appcontext
-#def shutdown_session(exception=None):
- #   db_session.remove()
+
 
 if __name__ == '__main__':
     app.run(debug=True)

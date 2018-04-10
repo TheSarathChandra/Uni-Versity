@@ -1,15 +1,19 @@
+
+<title>University</title>
+    <link rel="icon" type="image/png" href="../static/univ.ico"/>
+
 <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
  
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/signup.css" rel="stylesheet">
 
-<h1>{{ sessionlol }}</h1>
+<h1 style=" color: black; text-shadow: 2px 2px 4px #000000;"><center>Student : {{ sessionlol}}</center></h1>
+     <br>
+
 
 <div class="jumbotron" style="background-color: rgba(128,128,128,0.1)" >
  <table style = "width: 100%">
-  {% for item in studdet %}
-  {% if item['studentID'] == sessionlol %}
-  <tr>
+   <tr>
          <th>CourseID</th>
         <th>CourseName</th>
         <th>StudentID</th>
@@ -17,6 +21,9 @@
         <th>Marks</th>
         <th>Attendance</th>
   </tr>
+  {% for item in studdet %}
+  {% if item['studentID'] == sessionlol %}
+ 
   <tr>
          <td>{{ item['courseID'] }} </td>
         <td>{{ item['courseName'] }} </td>
@@ -28,7 +35,28 @@
   {% endif %}
 {% endfor %}
 </table>
+
+<br>
+<table style = "width: 100%">
+   <tr>
+         <th>Address</th>
+        <th>Phone Number</th>
+       
+  </tr>
+  {% for i in stud %}
+  {% if i['ID'] == sessionlol %}
+  <tr>
+      
+        <td> {{ i['address'] }} </td>
+        <td> {{ i['phone'] }} </td>
+    </tr>
+    {% endif %}
+{% endfor %}
+</table>
+
 </div>
+
+<a href="{{ url_for('changeStudentDetails') }}"><input type="submit" href="../templates/course1.html" value="Change your address/phone          " class="btn btn-primary btn-lg btn-block"></a>
 
       <br>
       <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Back</a>
