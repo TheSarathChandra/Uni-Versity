@@ -50,6 +50,18 @@ def showSignIn():
             user = not_found_error
     return render_template('signin.html')
 
+@app.route('/AdminForgotPassword',methods=['POST','GET'])
+def AdminForgotPassword():
+    if request.method == 'POST':
+        user = User.query.filter_by(name=request.form['inputName']).first()
+        if request.form['inputEmail']== user.email :
+            adminpass = user.password
+            return render_template('showadminpassword.html',adminpass=adminpass)
+            
+    if request.method == 'GET':
+        return render_template('adminforgotpassword.html')
+    
+
 
 
 #Student SignUp
