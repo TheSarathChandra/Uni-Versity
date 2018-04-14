@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Pure CSS 404 Error Page</title>
+  
+  
+  
+      <link rel="stylesheet" href="../static/errorstyle.css">
+
+  
+</head>
+
+<body>
+
+   <div id="clouds">
+            <div class="cloud x1"></div>
+            <div class="cloud x1_5"></div>
+            <div class="cloud x2"></div>
+            <div class="cloud x3"></div>
+            <div class="cloud x4"></div>
+            <div class="cloud x5"></div>
+        </div>
+        <div class='c'>
+            <div class='_1'>Wrong Credentials</div>
+            <br>
+            <hr>
+            <div class='_2'>TRY AGAIN</div>
+            <br>
+            <a class='btn' href="{{ url_for('showSignIn') }}">Go Back to Sign In</a>
+            <a class='btn' href="{{ url_for('AdminForgotPassword') }}">Forgot Password?</a>
+        </div>
+  
+  
+
+</body>
+
+</html>

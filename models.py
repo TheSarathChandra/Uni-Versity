@@ -63,21 +63,19 @@ class StudentCourse(Base):
     __tablename__='studentCourses'
 
     courseID = db.Column(db.String(50),ForeignKey('Courses.courseID'),primary_key=True,unique=False)
-    courseName =  db.Column(db.String(50),unique=False)
     studentID =  db.Column(db.String(50),ForeignKey('Students.ID'),primary_key=True,unique=False)
-    studentName =  db.Column(db.String(50),unique=False)
     marks = db.Column(db.Integer(),unique=False)
     attendance = db.Column(db.Integer(),unique=False)
+    status = db.Column(db.Integer(),unique=False)
     Courses = relationship("Course")
     Students = relationship("Student")
 
-    def __init__(self, courseID, courseName, studentID, studentName, marks,attendance):
+    def __init__(self, courseID, studentID, marks,attendance,status):
         self.courseID = courseID
-        self.courseName = courseName
         self.studentID = studentID
-        self.studentName = studentName
         self.marks = marks
         self.attendance = attendance
+        self.status = status
 
 
 class Department(Base):

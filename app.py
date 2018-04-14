@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from flask import Flask,redirect,session,url_for,abort
-from flask import Flask, render_template, request
+from flask import Flask, flash,render_template, request
 import os
+from sqlalchemy import create_engine
 from flask_sqlalchemy import SQLAlchemy
 from models import *
 
@@ -10,6 +11,7 @@ from models import *
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
+engine = create_engine('sqlite:///user.db', echo=True)
 
 app.config['SECRET_KEY'] = 'my precious'
 
@@ -45,9 +47,11 @@ def showSignIn():
     
         if request.form['inputPassword']== user.password :
             session['inputName'] = request.form['inputName']
+            flash('You were successfully logged in')
             return redirect(url_for('showDepartments'))
         else:
-            user = not_found_error
+            flash('You were not successfully logged in')
+            return render_template('error.html')
     return render_template('signin.html')
 
 @app.route('/AdminForgotPassword',methods=['POST','GET'])
@@ -89,6 +93,7 @@ def showSignIn1():
             session['inputID'] = request.form['inputID']
             return redirect(url_for('showStudentDetails'))
         else:
+            return render_template('error1.html')
             student = not_found_error
     return render_template('signin1.html')
 
@@ -141,6 +146,7 @@ def changeDepartments():
     if request.method == 'POST':
         changedepart = Department.query.filter_by(departmentID=request.form['inputDepartmentID']).first()
         changedepart.departmentName = request.form['inputDepartmentName']
+        db.engine.execute("UPDATE Departments SET departmentName = '"+request.form['inputDepartmentName']+"' WHERE departmentID='"+request.form['inputDepartmentID']+"'")
         db.session.commit() 
         return redirect(url_for('showDepartments'))
 
@@ -202,13 +208,39 @@ def changeCourses():
     if request.method == 'POST':
         changecours = Course.query.filter_by(courseID=request.form['inputCourseID']).first()
         changecours.courseName = request.form['inputCourseName']
+        db.engine.execute("UPDATE Courses SET courseName = '"+request.form['inputCourseName']+"' WHERE courseID='"+request.form['inputCourseID']+"'")
         changecours.credits = request.form['inputCredits']
+        db.engine.execute("UPDATE Courses SET credits = '"+request.form['inputCredits']+"' WHERE courseID='"+request.form['inputCourseID']+"'")
         changecours.department = request.form['inputDepartment']
+        db.engine.execute("UPDATE Courses SET department = '"+request.form['inputDepartment']+"' WHERE courseID='"+request.form['inputCourseID']+"'")
         db.session.commit() 
         return redirect(url_for('showCourses',department=request.form['inputDepartment']))
 
     if request.method == 'GET' and session['inputName']:    
         return render_template('course2.html')
+
+
+
+# @app.route('/changeCourses',methods=['POST','GET'])
+# def changeCourses():
+#     if request.method == 'POST':
+#         department=request.form['inputDepartment']
+#         print(department)
+#         changecours = Course.query.filter_by(courseID=request.form['inputCourseID'])
+#         changecours.courseName = request.form['inputCourseName']
+#         db.engine.execute("UPDATE Courses SET courseName = '"+request.form['inputcourseName']+"' WHERE courseID='"+request.form['inputCourseID']+"'")
+#         changecours.credits = request.form['inputCredits']
+#         db.engine.execute("UPDATE Courses SET credits = '"+request.form['inputCredits']+"' WHERE courseID='"+request.form['inputCourseID']+"'")
+#         changecours.department = request.form['inputDepartment']
+#         db.engine.execute("UPDATE Courses SET department = '"+request.form['inputDepartment']+"' WHERE courseID='"+request.form['inputCourseID']+"'")
+#         department=request.form['inputDepartment']
+#         print(department)
+#         print(request.form['inputDepartment'])
+#         db.session.commit() 
+#         return redirect(url_for('showCourses',department='department'))
+
+#     if request.method == 'GET' and session['inputName']:    
+#         return render_template('course2.html')
 
 #Delete courses in that Particular Department
 
@@ -249,7 +281,7 @@ def showStudentCourses():
 @app.route('/editStudentCourses',methods=['POST','GET'])
 def editStudentCourses():
     if request.method == 'POST':
-        studentcourse = StudentCourse(request.form['inputCourseID'],request.form['inputCourseName'],request.form['inputStudentID'],request.form['inputStudentName'],request.form['inputMarks'], request.form['inputAttendance'])
+        studentcourse = StudentCourse(request.form['inputCourseID'],request.form['inputStudentID'],request.form['inputMarks'], request.form['inputAttendance'], request.form['inputStatus'])
         db.session.add(studentcourse)
         db.session.commit() 
         return redirect(url_for('showStudentCourses',courseID=request.form['inputCourseID']))
@@ -262,12 +294,15 @@ def editStudentCourses():
 @app.route('/changeStudentCourses',methods=['POST','GET'])
 def changeStudentCourses():
     if request.method == 'POST':
-        changestudcours = StudentCourse.query.filter_by(courseID=request.form['inputCourseID']).first()
-        changestudcours.courseName = request.form['inputCourseName']
+        changestudcours = StudentCourse.query.filter_by(courseID=request.form['inputCourseID'])
         changestudcours.studentID = request.form['inputStudentID']
-        changestudcours.studentName = request.form['inputStudentName']
+
         changestudcours.marks = request.form['inputMarks']
+        db.engine.execute("UPDATE studentCourses SET marks = '"+request.form['inputMarks']+"' WHERE courseID='"+request.form['inputCourseID']+"' AND studentID = '"+request.form['inputStudentID']+"' ")
         changestudcours.attendance = request.form['inputAttendance']
+        db.engine.execute("UPDATE studentCourses SET attendance = '"+request.form['inputAttendance']+"' where courseID='"+request.form['inputCourseID']+"' AND studentID = '"+request.form['inputStudentID']+"'")
+        changestudcours.status = request.form['inputStatus']
+        db.engine.execute("UPDATE studentCourses SET status = '"+request.form['inputStatus']+"' where courseID='"+request.form['inputCourseID']+"' AND studentID = '"+request.form['inputStudentID']+"'")
         db.session.commit() 
         return redirect(url_for('showStudentCourses',courseID=request.form['inputCourseID']))
 
@@ -299,9 +334,27 @@ def showStudentDetails():
     if request.method == 'GET' and session['inputID']:
         sessionlol=session['inputID']
         stud = Student.query.all()
-        studdet = StudentCourse.query.filter_by(studentID=session['inputID']).first()
-        studdet = db.engine.execute("SELECT * from StudentCourses") 
-        return render_template('studentdetails.html', studdet=studdet,sessionlol=session['inputID'], stud=stud)
+        studdet = db.engine.execute("SELECT * from studentCourses where studentID='"+session['inputID']+"'")
+        courses = db.engine.execute("SELECT * from studentCourses where studentID='"+session['inputID']+"'")
+        #courses = StudentCourse.query.filter_by(studentID=session['inputID']).first()
+        cgpa = 0.0
+        sum = 0.0
+        tot = 0.0
+        for item in courses:
+           # actualCourse = db.engine.execute("SELECT * from Courses where courseID = item['courseID']")
+            print("SELECT * from Courses where courseID = course.courseID")
+            actualcourse = Course.query.filter_by(courseID=item['courseID']).first()
+            a = actualcourse.credits
+            if item.attendance >= 75 and item.status == 1 :
+                m = int(item.marks/10) + 1
+            else :
+                m = 0.0
+                a = 0.0
+            sum += a*m
+            tot += a
+        cgpa = sum/tot
+
+        return render_template('studentdetails.html', studdet=studdet,sessionlol=session['inputID'], stud=stud,cgpa=cgpa)
 
 
 #Change Address or Phone Number of the Student

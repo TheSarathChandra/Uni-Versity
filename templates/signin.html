@@ -12,16 +12,16 @@
     
 <style>
 
+
  body {width: 100%;
             height: 100%;
             max-height: 100%;
             margin: 0;
             padding: 0;
-            background-image: url('../static/tie.jpg');
+            background-image: url('../static/tuxedo.jpg');
             background-size:100% 100%;
             background-repeat: no-repeat;
         }
-
 
 </style>
 
@@ -43,8 +43,10 @@
       </div> -->
  
       <div class="jumbotron" style="background-color: rgba(128,128,128,0.0)" >
-        <h1 style=" color: white; text-shadow: 2px 2px 4px #000000;">Sign-in</h1>
-        <form method="POST" class="form-signin" action="{{url_for('showSignIn')}}">
+         <h1 style=" color: white; text-shadow: 2px 2px 4px #000000;"><center>Sign in</center></h1>
+     
+     
+       <form method="POST" class="form-signin" action="{{url_for('showSignIn')}}">
         <label for="inputName" class="sr-only">Name</label>
         <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
@@ -52,10 +54,21 @@
          
        <input type="submit" value="Sign in" class="btn btn-primary btn-lg btn-block">
       </form>
-      </div>
+
+     <center> <a href="{{ url_for('showSignUp') }}"><input class="btn btn-default btn-sm" type="submit"  value="Sign Up"></a>
+      &nbsp;<a href="{{ url_for('AdminForgotPassword') }}"><input class="btn btn-default btn-sm" type="submit"  value="Forgot Password"></a></center>
+
       
-      <center> <a href="{{ url_for('AdminForgotPassword') }}"><input type="submit"  value="Forgot Password"></a></center>
-         <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br>
+     
+      </div>
+       
+     
+   
+      
+       
+   
+         <br><br><br><br><br><br><br><br><br><br><br>
 
 
 

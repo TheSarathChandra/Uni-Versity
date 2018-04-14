@@ -5,39 +5,82 @@
   <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
  
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/cloud.css" rel="stylesheet">
     <link href="../static/signup.css" rel="stylesheet">
 
+        <style>
 
- <div class="jumbotron" style="background-color: rgba(128,128,128,0.1)" >
+ body {width: 100%;
+            height: 100%;
+            max-height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('../static/therill.jpg');
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+        }
+
+
+</style>
+     <br>
+      <div id="clouds">
+            <div class="cloud x1"></div>
+            <div class="cloud x1_5"></div>
+            <div class="cloud x2"></div>
+            <div class="cloud x3"></div>
+            <div class="cloud x4"></div>
+            <div class="cloud x5"></div>
+        </div>
+    
+  <center> <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('showDepartments') }}" role="button">Department Page</a>
+      <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('main') }}" role="button">Main Page</a>
+        <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('logout') }}" role="button" > logout</a></center>
+        <br>
+
+ <div class="jumbotron" style="background-color: rgba(128,128,128,0.3)" >
  <table style = "width: 100%">
   <tr>
-    <th>Course ID</th>
-    <th>Course Name</th>
-    <th>Student ID</th>
-    <th>Student Name</th>
-    <th>Marks</th> 
-    <th>Attendance</th> 
+    <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Course ID</th>
+    <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Student ID</th>
+    <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Marks</th> 
+    <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Attendance</th> 
+    <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Fee Status</th> 
   </tr>
   {% for item in studcours %}
   <tr>
-        <td>{{ item['courseID'] }} </td>
-        <td>{{ item['courseName'] }} </td>
-        <td>{{ item['studentID'] }} </td>
-        <td>{{ item['studentName'] }} </td>
-        <td>{{ item['marks'] }} </td>
-        <td>{{ item['attendance'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['courseID'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['studentID'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['marks'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['attendance'] }} </td>
+        {% if item['status'] == 0 %}
+        <td class="btn btn-danger" style=" color: white; text-shadow: 2px 2px 4px #000000;">Not Paid </td>
+        {% else %}
+        <td class="btn btn-success" style=" color: white; text-shadow: 2px 2px 4px #000000;">Paid </td>
+        {% endif %}
+        <br>
     </tr>
 {% endfor %}
 </table>
 </div>
-<p class="pull-right"><center>add courses here:</center></p>
-    <a href="{{ url_for('editStudentCourses') }}"><input type="submit" value="add" class="btn btn-primary btn-lg btn-block"></a>
+<h class="pull-right" style=" color: white; text-shadow: 2px 2px 4px #000000;"><center>add courses here:</center></h>
+<br>
+    <!-- <a href="{{ url_for('editStudentCourses') }}"><input type="submit" value="add" class="btn btn-primary btn-lg btn-block"></a>
     <a href="{{ url_for('changeStudentCourses') }}"><input type="submit" value="change" class="btn btn-primary btn-lg btn-block"></a>
      <a href="{{ url_for('deleteStudentCourses') }}"><input type="submit" style="color: red" value="delete" class="btn btn-primary btn-lg btn-block"></a>
-      </div>
-      <br>
+      </div> -->
+      <center><div class="btn-group">
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="{{ url_for('editStudentCourses') }}"><input type="submit" href="../templates/department1.html" value="add" style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary"></a>
+    &nbsp;
+      <a href="{{ url_for('changeStudentCourses') }}"><input type="submit" href="../templates/course1.html" value="change" style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary"></a>
+      &nbsp;
+     <a href="{{ url_for('deleteStudentCourses') }}"><input type="submit" href="../templates/course1.html" value="delete" style="text-shadow: 2px 2px 4px #000000;" class="btn btn-danger"></a>
+</div></center>
+<br>
+    <!--   <br>
 <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('showDepartments') }}" role="button">Back to Department Page</a>
             </p>
     <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Main Page</a>
    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('logout') }}" role="button">logout</a>
             </p>
+ -->
+           

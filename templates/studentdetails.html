@@ -5,52 +5,86 @@
 <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
  
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/cloud.css" rel="stylesheet">
     <link href="../static/signup.css" rel="stylesheet">
 
-<h1 style=" color: black; text-shadow: 2px 2px 4px #000000;"><center>Student ID : {{ sessionlol}}</center></h1>
+        <style>
+
+ body {width: 100%;
+            height: 100%;
+            max-height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('../static/therill.jpg');
+            background-size:100% 100%;
+            background-repeat: no-repeat;
+        }
+
+
+</style>
+     <br>
+      <div id="clouds">
+            <div class="cloud x1"></div>
+            <div class="cloud x1_5"></div>
+            <div class="cloud x2"></div>
+            <div class="cloud x3"></div>
+            <div class="cloud x4"></div>
+            <div class="cloud x5"></div>
+        </div>
+<head>
+<h1 style=" color: white; text-shadow: 2px 2px 4px #000000;"><center>Student ID : {{ sessionlol}}</center></h1>
      <br>
 
+<div class="jumbotron" style="background-color: rgba(0,0,0,0.1)" >
+     <h1 style=" color: white; text-shadow: 2px 2px 4px #000000;"><center>{{cgpa}}</center></h1>
+   </div>
+</head>
 
-<div class="jumbotron" style="background-color: rgba(128,128,128,0.1)" >
+<body>
+<div class="jumbotron" style="background-color: rgba(0,0,0,0.1)" >
  <table style = "width: 100%">
    <tr>
-         <th>CourseID</th>
-        <th>CourseName</th>
-        <th>Marks</th>
-        <th>Attendance</th>
+         <th style=" color: white; text-shadow: 2px 2px 4px #000000;">CourseID</th>
+        <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Marks</th>
+        <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Attendance</th>
+        <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Fee Status</th>
   </tr>
   {% for item in studdet %}
-  {% if item['studentID'] == sessionlol %}
+  <!-- {% if item['studentID'] == sessionlol %} -->
  
   <tr>
-         <td>{{ item['courseID'] }} </td>
-        <td>{{ item['courseName'] }} </td>
-        <td>{{ item['marks'] }} </td>
-        <td>{{ item['attendance'] }} </td>
+         <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['courseID'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['marks'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['attendance'] }} </td>
+        {% if item['status'] == 0 %}
+        <td class="btn btn-danger" style=" color: white; text-shadow: 2px 2px 4px #000000;">Not Paid </td>
+        {% else %}
+        <td class="btn btn-success" style=" color: white; text-shadow: 2px 2px 4px #000000;">Paid </td>
+        {% endif %}
   </tr>
-  {% endif %}
+  <!-- {% endif %} -->
 {% endfor %}
 </table>
 
 <br>
 </div>
-<div class="jumbotron" style="background-color: rgba(128,128,128,0.1)" >
+<div class="jumbotron" style="background-color: rgba(0,0,0,0.1)" >
 
 <table style = "width: 100%">
    <tr> 
-        <th>Student Name</th>
-        <th>Address</th>
-        <th>Phone Number 1</th>
-        <th>Phone Number 2</th>
+        <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Student Name</th>
+        <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Address</th>
+        <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Phone Number 1</th>
+        <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Phone Number 2</th>
        
   </tr>
   {% for i in stud %}
   {% if i['ID'] == sessionlol %}
   <tr>
-        <td> {{ i['name'] }} </td>
-        <td> {{ i['address'] }} </td>
-        <td> {{ i['phone1'] }} </td>
-        <td> {{ i['phone2'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;"> {{ i['name'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;"> {{ i['address'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;"> {{ i['phone1'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;"> {{ i['phone2'] }} </td>
     </tr>
     {% endif %}
 {% endfor %}
@@ -58,10 +92,15 @@
 
 </div>
 
-<a href="{{ url_for('changeStudentDetails') }}"><input type="submit" href="../templates/course1.html" value="Change your address/phone          " class="btn btn-primary btn-lg btn-block"></a>
+<!-- <a href="{{ url_for('changeStudentDetails') }}"><input type="submit" href="../templates/course1.html" value="Change your address/phone          " class="btn btn-primary btn-lg btn-block"></a>
 
       <br>
       <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('main') }}" role="button">Back</a>
             </p>
    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('studentLogout') }}" role="button">logout</a>
-            </p>
+            </p> -->
+
+             <center> <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('changeStudentDetails') }}" role="button">Change your address/phone</a>
+      <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('main') }}" role="button">Main Page</a>
+        <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('studentLogout') }}" role="button" > logout</a></center>
+      </body>
