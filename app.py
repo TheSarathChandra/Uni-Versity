@@ -69,7 +69,7 @@ def AdminForgotPassword():
 @app.route('/showSignUp1', methods=['POST', 'GET'])
 def showSignUp1():
     if request.method == 'POST':
-        student = Student(request.form['inputID'],request.form['inputName'], request.form['inputEmail'], request.form['inputPassword'], request.form['inputAddress'], request.form['inputPhone'])
+        student = Student(request.form['inputID'],request.form['inputName'], request.form['inputEmail'], request.form['inputPassword'], request.form['inputAddress'], request.form['inputPhone1'],request.form['inputPhone2'])
         db.session.add(student)
         db.session.commit()
         return redirect(url_for('main'))
@@ -91,6 +91,17 @@ def showSignIn1():
         else:
             student = not_found_error
     return render_template('signin1.html')
+
+@app.route('/StudentForgotPassword',methods=['POST','GET'])
+def StudentForgotPassword():
+    if request.method == 'POST':
+        student = Student.query.filter_by(ID=request.form['inputID']).first()
+        if request.form['inputEmail']== student.email :
+            studentpass = student.password
+            return render_template('showstudentpassword.html',studentpass=studentpass)
+            
+    if request.method == 'GET':
+        return render_template('studentforgotpassword.html')
 
 #............................................................................................................................
 
@@ -298,9 +309,10 @@ def showStudentDetails():
 @app.route('/changeStudentDetails',methods=['POST','GET'])
 def changeStudentDetails():
     if request.method == 'POST':
-        changestuddet = Student.query.filter_by(ID=session['inputID']).first()
+        changestuddet = Student.query.filter_by(ID=request.form['inputID']).first()
         changestuddet.address = request.form['inputAddress']
-        changestuddet.phone = request.form['inputPhone']
+        changestuddet.phone1 = request.form['inputPhone1']
+        changestuddet.phone2 = request.form['inputPhone2']
         db.session.commit() 
         return redirect(url_for('showStudentDetails'))
 

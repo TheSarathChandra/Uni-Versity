@@ -7,7 +7,7 @@
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/signup.css" rel="stylesheet">
 
-<h1 style=" color: black; text-shadow: 2px 2px 4px #000000;"><center>Student : {{ sessionlol}}</center></h1>
+<h1 style=" color: black; text-shadow: 2px 2px 4px #000000;"><center>Student ID : {{ sessionlol}}</center></h1>
      <br>
 
 
@@ -16,8 +16,6 @@
    <tr>
          <th>CourseID</th>
         <th>CourseName</th>
-        <th>StudentID</th>
-        <th>StudentName</th>
         <th>Marks</th>
         <th>Attendance</th>
   </tr>
@@ -27,8 +25,6 @@
   <tr>
          <td>{{ item['courseID'] }} </td>
         <td>{{ item['courseName'] }} </td>
-        <td>{{ item['studentID'] }} </td>
-        <td>{{ item['studentName'] }} </td>
         <td>{{ item['marks'] }} </td>
         <td>{{ item['attendance'] }} </td>
   </tr>
@@ -37,18 +33,24 @@
 </table>
 
 <br>
+</div>
+<div class="jumbotron" style="background-color: rgba(128,128,128,0.1)" >
+
 <table style = "width: 100%">
-   <tr>
-         <th>Address</th>
-        <th>Phone Number</th>
+   <tr> 
+        <th>Student Name</th>
+        <th>Address</th>
+        <th>Phone Number 1</th>
+        <th>Phone Number 2</th>
        
   </tr>
   {% for i in stud %}
   {% if i['ID'] == sessionlol %}
   <tr>
-      
+        <td> {{ i['name'] }} </td>
         <td> {{ i['address'] }} </td>
-        <td> {{ i['phone'] }} </td>
+        <td> {{ i['phone1'] }} </td>
+        <td> {{ i['phone2'] }} </td>
     </tr>
     {% endif %}
 {% endfor %}

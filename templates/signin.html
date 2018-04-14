@@ -44,7 +44,6 @@
  
       <div class="jumbotron" style="background-color: rgba(128,128,128,0.0)" >
         <h1 style=" color: white; text-shadow: 2px 2px 4px #000000;">Sign-in</h1>
-        <br>
         <form method="POST" class="form-signin" action="{{url_for('showSignIn')}}">
         <label for="inputName" class="sr-only">Name</label>
         <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
@@ -54,23 +53,9 @@
        <input type="submit" value="Sign in" class="btn btn-primary btn-lg btn-block">
       </form>
       </div>
-      <br>
-      <br><br><br><br>
-        
-         <a href="{{ url_for('AdminForgotPassword') }}"><input type="submit" style=" color: white; text-shadow: 2px 2px 4px #000000;" value="Forgot Password"></a>
       
-<br>
-<br>
-      
-
-       
-<footer class="footer">
-        <p style=" color: white; text-shadow: 2px 2px 4px #000000;"> &copy; 2018</p>
-      </footer>
-
-      <br>
-      <br>
-      <br>
+      <center> <a href="{{ url_for('AdminForgotPassword') }}"><input type="submit"  value="Forgot Password"></a></center>
+         <br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 
