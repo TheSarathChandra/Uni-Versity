@@ -35,8 +35,9 @@ class Student(Base):
     address = db.Column(db.String(50))
     phone1 = db.Column(db.Integer())
     phone2 = db.Column(db.Integer())
+    yos = db.Column(db.Integer())
 
-    def __init__(self, ID, name, email,password,address,phone1,phone2):
+    def __init__(self, ID, name, email,password,address,phone1,phone2,yos):
         self.ID = ID
         self.name = name
         self.email = email
@@ -44,6 +45,7 @@ class Student(Base):
         self.address = address
         self.phone1 = phone1
         self.phone2 = phone2
+        self.yos = yos
 
 class Course(Base):
     __tablename__ = 'Courses'

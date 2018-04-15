@@ -17,7 +17,10 @@
             padding: 0;
             background-image: url('../static/img4.jpg');
             background-size:100% 100%;
-            background-repeat: no-repeat;
+            /*background-repeat: no-repeat*/
+            position: relative;
+            justify-content: center;
+            align-items: center;
         }
 
 
@@ -45,7 +48,8 @@
 </head>
 
 <body>
-<div class="jumbotron" style="background-color: rgba(0,0,0,0.1)" >
+  <div>
+<div class="jumbotron" style="background-color: rgba(0,0,0,0.3)" >
  <table style = "width: 100%">
    <tr>
          <th style=" color: white; text-shadow: 2px 2px 4px #000000;">CourseID</th>
@@ -78,7 +82,7 @@
 
 <br>
 </div>
-<div class="jumbotron" style="background-color: rgba(0,0,0,0.1)" >
+<div class="jumbotron" style="background-color: rgba(0,0,0,0.3)" >
 
 <table style = "width: 100%">
    <tr> 
@@ -86,6 +90,7 @@
         <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Address</th>
         <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Phone Number 1</th>
         <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Phone Number 2</th>
+        <th style=" color: white; text-shadow: 2px 2px 4px #000000;">Year of Study</th>
        
   </tr>
   {% for i in stud %}
@@ -95,6 +100,7 @@
         <td style=" color: white; text-shadow: 2px 2px 4px #000000;"> {{ i['address'] }} </td>
         <td style=" color: white; text-shadow: 2px 2px 4px #000000;"> {{ i['phone1'] }} </td>
         <td style=" color: white; text-shadow: 2px 2px 4px #000000;"> {{ i['phone2'] }} </td>
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;"> {{ i['yos'] }} </td>
     </tr>
     {% endif %}
 {% endfor %}
@@ -115,4 +121,5 @@
       <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('main') }}" role="button">Main Page</a>
         <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('studentLogout') }}" role="button" > logout</a></center>
       </div>
+    </div>
       </body>

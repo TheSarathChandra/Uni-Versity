@@ -73,7 +73,7 @@ def AdminForgotPassword():
 @app.route('/showSignUp1', methods=['POST', 'GET'])
 def showSignUp1():
     if request.method == 'POST':
-        student = Student(request.form['inputID'],request.form['inputName'], request.form['inputEmail'], request.form['inputPassword'], request.form['inputAddress'], request.form['inputPhone1'],request.form['inputPhone2'])
+        student = Student(request.form['inputID'],request.form['inputName'], request.form['inputEmail'], request.form['inputPassword'], request.form['inputAddress'], request.form['inputPhone1'],request.form['inputPhone2'],request.form['inputYOS'])
         db.session.add(student)
         db.session.commit()
         return redirect(url_for('main'))
@@ -314,7 +314,8 @@ def changeStudentCourses():
 @app.route('/deleteStudentCourses',methods=['POST','GET'])
 def deleteStudentCourses():
     if request.method == 'POST':
-        deletestudcours = StudentCourse.query.filter_by(studentID=request.form['inputStudentID']).delete()
+        deletestudcours = StudentCourse.query.filter_by(studentID=request.form['inputStudentID'])
+        db.engine.execute("DELETE FROM studentCourses where courseID='"+request.form['inputCourseID']+"' AND studentID = '"+request.form['inputStudentID']+"'")
         db.session.commit()
         return redirect(url_for('showStudentCourses',courseID=request.form['inputCourseID']))
 
@@ -343,6 +344,8 @@ def showStudentDetails():
         flag = 0
         for item in courses:
            # actualCourse = db.engine.execute("SELECT * from Courses where courseID = item['courseID']")
+            m = 0
+            a = 0
             print("SELECT * from Courses where courseID = course.courseID")
             actualcourse = Course.query.filter_by(courseID=item['courseID']).first()
             a = actualcourse.credits
