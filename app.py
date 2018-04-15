@@ -349,13 +349,11 @@ def showStudentDetails():
             print("SELECT * from Courses where courseID = course.courseID")
             actualcourse = Course.query.filter_by(courseID=item['courseID']).first()
             a = actualcourse.credits
-            if item.marks<35 :
+            if item.marks<35 or item.attendance <= 75 or item.status == 0:
                 flag = 1
-            if item.attendance >= 75 and item.status == 1 :
-                m = int(item.marks/10) + 1
-            else :
-                m = 0.0
-                a = 0.0
+            
+            m = int(item.marks/10) + 1
+            
             sum += a*m
             tot += a
 
