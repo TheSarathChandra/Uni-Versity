@@ -36,7 +36,11 @@
      <br>
 
 <div class="jumbotron" style="background-color: rgba(0,0,0,0.1)" >
+  {% if cgpa == 0.0 %} 
+     <h1 style=" color: white; text-shadow: 2px 2px 4px #000000;"><center>FAIL</center></h1>
+     {% else %}
      <h1 style=" color: white; text-shadow: 2px 2px 4px #000000;"><center>{{cgpa}}</center></h1>
+     {% endif %}
    </div>
 </head>
 
@@ -54,7 +58,13 @@
  
   <tr>
          <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['courseID'] }} </td>
+
+        {% if item['marks'] < 35 %} 
+        <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['marks'] }} (FAIL)</td>
+        {% else %}
         <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['marks'] }} </td>
+        {% endif %}
+
         <td style=" color: white; text-shadow: 2px 2px 4px #000000;">{{ item['attendance'] }} </td>
         {% if item['status'] == 0 %}
         <td class="btn btn-danger" style=" color: white; text-shadow: 2px 2px 4px #000000;">Not Paid </td>
@@ -99,8 +109,10 @@
             </p>
    <p style="text-shadow: 2px 2px 4px #000000;"><a class="btn btn-lg btn-success" href="{{ url_for('studentLogout') }}" role="button">logout</a>
             </p> -->
+            <div class="jumbotron" style="background-color: rgba(0,0,0,0.1)" >
 
              <center> <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('changeStudentDetails') }}" role="button">Change your address/phone</a>
       <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('main') }}" role="button">Main Page</a>
         <a style="text-shadow: 2px 2px 4px #000000;" class="btn btn-primary" href="{{ url_for('studentLogout') }}" role="button" > logout</a></center>
+      </div>
       </body>

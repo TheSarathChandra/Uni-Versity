@@ -340,19 +340,26 @@ def showStudentDetails():
         cgpa = 0.0
         sum = 0.0
         tot = 0.0
+        flag = 0
         for item in courses:
            # actualCourse = db.engine.execute("SELECT * from Courses where courseID = item['courseID']")
             print("SELECT * from Courses where courseID = course.courseID")
             actualcourse = Course.query.filter_by(courseID=item['courseID']).first()
             a = actualcourse.credits
-            if item.attendance >= 75 and item.status == 1 and item.marks>35 :
+            if item.marks<35 :
+                flag = 1
+            if item.attendance >= 75 and item.status == 1 :
                 m = int(item.marks/10) + 1
             else :
                 m = 0.0
                 a = 0.0
             sum += a*m
             tot += a
-        cgpa = sum/tot
+
+        if flag == 1:
+            cgpa = 0.0
+        else :        
+            cgpa = sum/tot
 
         return render_template('studentdetails.html', studdet=studdet,sessionlol=session['inputID'], stud=stud,cgpa=cgpa)
 
@@ -362,10 +369,13 @@ def showStudentDetails():
 @app.route('/changeStudentDetails',methods=['POST','GET'])
 def changeStudentDetails():
     if request.method == 'POST':
-        changestuddet = Student.query.filter_by(ID=request.form['inputID']).first()
+        changestuddet = Student.query.filter_by(ID=session['inputID']).first()
         changestuddet.address = request.form['inputAddress']
+        db.engine.execute("UPDATE Students SET address = '"+request.form['inputAddress']+"' WHERE ID='"+session['inputID']+"' ")
         changestuddet.phone1 = request.form['inputPhone1']
+        db.engine.execute("UPDATE Students SET phone1 = '"+request.form['inputPhone1']+"' WHERE ID='"+session['inputID']+"' ")
         changestuddet.phone2 = request.form['inputPhone2']
+        db.engine.execute("UPDATE Students SET phone2 = '"+request.form['inputPhone2']+"' WHERE ID='"+session['inputID']+"' ")
         db.session.commit() 
         return redirect(url_for('showStudentDetails'))
 
