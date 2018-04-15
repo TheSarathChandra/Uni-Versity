@@ -357,7 +357,7 @@ def showStudentDetails():
             sum += a*m
             tot += a
 
-        if flag == 1:
+        if flag == 1 or tot == 0.0 :
             cgpa = 0.0
         else :        
             cgpa = sum/tot
