@@ -383,6 +383,17 @@ def changeStudentDetails():
     if request.method == 'GET' and session['inputID']:    
         return render_template('studentdetails2.html')
 
+@app.route('/deleteStudentDetails',methods=['POST','GET'])
+def deleteStudentDetails():
+    if request.method == 'POST':
+        db.engine.execute("DELETE FROM Students where ID = '"+request.form['inputStudentID']+"'")
+        db.engine.execute("DELETE FROM studentCourses where studentID = '"+request.form['inputStudentID']+"'")
+        db.session.commit() 
+        return redirect(url_for('showDepartments'))
+
+    if request.method == 'GET' and session['inputName']:    
+        return render_template('studentdetails3.html')
+
 #...............................................................................................................................
 
 

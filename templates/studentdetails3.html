@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>University</title>
+    <link rel="icon" type="image/png" href="../static/univ.ico"/>
+ 
+    
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+    
+
+  </head>
+ 
+  <body>
+    &nbsp;
+ 
+      <div class="jumbotron" style="background-color: rgba(0,0,0,0.0)" >
+        <h1 style=" color: white; text-shadow: 2px 2px 4px #000000;"><center>Delete a Student</center></h1>
+        <br>
+        <br>
+        <form method="POST" class="form-signin" action="{{url_for('deleteStudentDetails')}}">
+        <label for="inputStudentID" class="sr-only">StudentID</label>
+        <input type="text" name="inputStudentID" id="inputStudentID" class="form-control" placeholder="StudentID" required>
+        
+
+       
+         
+       <input type="submit" value="DELETE" class="btn btn-primary btn-lg btn-block">
+      </form>
+
+      
+     
+ 
+       
+ 
+      
+      <br>
+       <br>
+        <br>
+         <br>
+       <br>
+
+       <br>
+
+      <br>
+
+       
+<footer class="footer">
+        <p style=" color: white; text-shadow: 2px 2px 4px #000000;"> &copy; 2018</p>
+      </footer>
+
+
+
+
+ 
+    </div>
+  </body>
+</html>
